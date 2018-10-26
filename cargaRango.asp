@@ -7,7 +7,7 @@
 
 </HEAD>
 
-<body onload="maximizar()">
+<body >
 
 <H5>Hoy es: <%=weekdayname(weekday(date()))%>, <%=date%></H5>
 <h1>SECTOR INGRESOS Y RENDICIONES DE D.E.</h1>
@@ -15,14 +15,14 @@
 <hr size= 6 color="black"></hr>
 
 <h3> CARGA DE RANGOS</H3>
-<form>
+<form action="carga.asp" method="POST" id="cargador" name="cargador">
 <table align="center">
 <tr>
 <td>
 <b>INGRESE EL 1er CÓDIGO DE BARRAS</b>
 </td>
 <td>
-<input type="text" name="primerNUM" id="primerNUM" maxlength="12" autofocus required>
+<input type="text" name="primerNUM" id="primerNUM" maxlength="12" required autofocus >
 </td>
 </tr>
 <tr>
@@ -30,7 +30,7 @@
 <b>INGRESE EL 2do CÓDIGO DE BARRAS</b>
 </td>
 <td>
-<input type="text" name="segundoNUM" id="segundoNUM" required>
+<input type="text" name="segundoNUM" id="segundoNUM" maxlength="12" onblur="enviar()" required>
 </td>
 </tr>
 </table>
@@ -49,12 +49,12 @@
 
 <SCRIPT Language="javascript" type="text/javascript">
 
-function maximizar() {
+function enviar() {
 
-window.moveTo(0,0);
+document.getElementById("cargador").submit();
 
-window.resizeTo(screen.width,screen.height);
 }
+
 </SCRIPT>
 
 
