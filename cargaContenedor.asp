@@ -12,19 +12,18 @@
 
 <H5>Hoy es: <%=weekdayname(weekday(date()))%>, <%=date%></H5>
 <h1>SECTOR INGRESOS Y RENDICIONES DE D.E.</h1>
-<br>
+
 <hr size= 6 color="black"></hr>
 
 <br>
-
-<h3> ELIJA LA OPCIÓN QUE CORRESPONDA</H3>
+<h3> GENERACION DE CONTENEDOR</H3>
 <br>
 
-
 <table align="center">
+<td align="center"><input type="button" class="button" name="volver" onclick=location.href='index.asp' value="VOLVER"></td>
 <tr align="center">
-<td><input type="button" class="button" name="iniciar" onclick=location.href='cargaRango.asp' value="CARGAR RANGOS"></td>
-<td><input type="button" class="button" name="contenedor" onclick=location.href='cargaContenedor.asp' value="GENERAR CONTENEDOR"></td>
+<td></td>
+<td></td>
 </tr>
 </table>
 
