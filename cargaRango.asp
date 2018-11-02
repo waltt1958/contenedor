@@ -19,18 +19,18 @@
 <table align="center">
 <tr>
 <td>
-<b>INGRESE EL 1er CÓDIGO DE BARRAS</b>
+<b>INGRESE EL 1er CODIGO DE BARRAS</b>
 </td>
 <td>
-<input type="text" name="primerNUM" id="primerNUM" maxlength="12" required autofocus >
+<input type="text" name="primerNUM" id="primerNUM" maxlength="10" required autofocus >
 </td>
 </tr>
 <tr>
 <td>
-<b>INGRESE EL 2do CÓDIGO DE BARRAS</b>
+<b>INGRESE EL 2do CODIGO DE BARRAS</b>
 </td>
 <td>
-<input type="text" name="segundoNUM" id="segundoNUM" maxlength="12" onblur="enviar()" required>
+<input type="text" name="segundoNUM" id="segundoNUM" maxlength="10" onblur="enviar()" required>
 </td>
 </tr>
 </table>
@@ -48,12 +48,22 @@
 
 
 <SCRIPT Language="javascript" type="text/javascript">
-
 function enviar() {
 
-document.getElementById("cargador").submit();
+var primero = document.cargador.primerNUM.value.length;
+var segundo = document.cargador.segundoNUM.value.length;
 
-}
+if (( primero != 10) || (segundo != 10)) {
+	
+	alert ("Verique CB ingresado. Tiene que tener 10 digitos");
+	document.cargador.primerNUM.focus();
+	}
+	
+	else {
+	document.cargador.submit()
+	}
+	}
+
 
 </SCRIPT>
 
