@@ -4,26 +4,28 @@
 CARGAR LA BBDD Y LUEGO VOLVER A cargaRango.asp PARA SEGUIR CARGANDO
 <body>
 
-<!--#include virtual="/conectar.asp"-->
+
 
 <%
-primero	= request.form("primerNUM")
-segundo = request.form("segundoNUM")
+primero	= trim(request.form("primerNUM"))
+segundo = trim(request.form("segundoNUM"))
 
-if (not IsNumeric(trim(primero)) or not isNumeric(trim(segundo))) then
+if ((not IsNumeric(trim(primero)) or not isNumeric(trim(segundo))) or (len(primero) <> 10 or len(segundo) <> 10)) then
 
-response.redirect("cargaRango.asp?target=_self")
+response.redirect("error.asp?target=_self")
+
+else
+%>
+<!--#include virtual="/conectar.asp"-->
+<%
+
+
+
+
 
 
 
 end if
-
-'usar trim() dado que elimina los espacios en blanco al principio y final
-'TAMBIEN CONTROLAR QUE SEAN 10 LOS DIGITOS, EL ESPACIO NO LO CUENTA COMO TEXTO
-
-
-
-
 %>
 
 <!--#include virtual="/desconectar.asp"-->
