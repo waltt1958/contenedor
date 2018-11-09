@@ -8,7 +8,6 @@
 </HEAD>
 
 <body >
-<!--#include virtual="/conectar.asp"-->
 
 <H5>Hoy es: <%=weekdayname(weekday(date()))%>, <%=date%></H5>
 <h1>SECTOR INGRESOS Y RENDICIONES DE D.E.</h1>
@@ -17,67 +16,24 @@
 
 <h3> CARGA DE RANGOS</H3>
 <form action="carga.asp" method="POST" id="cargador" name="cargador">
-<table align="center" border="2">
-
+<table align="center">
 <tr>
-
-<td>
-<b>SELECCIONE LA SUCURSAL</b>
-</td>
-
-<td>
-<Select NAME="select" style="width: 300px;"  SIZE=1 autofocus>
-<% 
-
-set rs=server.createobject("ADODB.Recordset") 
-sql= "select * from CP_SUCURSALES order by SUCURSAL"
-rs.open sql, conectarOEP 
-
-Do While Not rs.EOF
-
-'response.write "<option value='" & rs("SIGLA") &"' >" & rs("SUCURSAL") & "</option>"
-
-response.write ("<option value='" &rs("CP")&"'>"& rs("SIGLA")& " - " & rs("SUCURSAL") &"</option>" )
-
-
-
-rs.MoveNext
-
-Loop
-rs.Close
-
-%>
-</Select>
-
-</td>
-
-</tr>
-
-<tr>
-
 <td>
 <b>INGRESE EL 1er CODIGO DE BARRAS</b>
 </td>
-
 <td>
-<input type="text" name="primerNUM" id="primerNUM" maxlength="10" required>
+<input type="text" name="primerNUM" id="primerNUM" maxlength="10" required autofocus >
 </td>
-
 </tr>
-
 <tr>
-
 <td>
 <b>INGRESE EL 2do CODIGO DE BARRAS</b>
 </td>
-
 <td>
 <input type="text" name="segundoNUM" id="segundoNUM" maxlength="10" onblur="enviar()" required>
 </td>
-
 </tr>
 </table>
-
 </form>
 <br>
 <br>
@@ -111,7 +67,6 @@ if (( primero != 10) || (segundo != 10)) {
 
 </SCRIPT>
 
-<!--#include virtual="/desconectar.asp"-->
 
 </body>
 
