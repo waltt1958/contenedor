@@ -19,53 +19,37 @@ else
 <!--#include virtual="/conectar.asp"-->
 <%
 
-codigo= request.form("select")
 
 set rs=server.createobject("ADODB.Recordset") 
 sql= "select * from RANGOS"
 rs.open sql, conectarOEP 
 
-
-PRIMERO VERIFICAR QUE NO VAYA A ESTAR DUPLICADO EL NUMERO CARGADO
-Y LUEGO SE LO AGREGA A LA BBDD
+menor = primero
+mayor = segundo
 
 If primero > segundo Then
-    mayor = primero
+    
+	mayor = primero
 	menor = segundo
-
-End If
-
-
-
-if rs!rango_desde = menor or rs!rango_hasta = mayor then 
 	
-session("repetido")= "si"
+End If
+response.write (menor)
+response.write (mayor)
 
+do while not rs.EOF
 
+if (menor = rs("rango_desde")) or (mayor = rs("rango_hasta")) then
+	
+	session("repetido")= "si"
+	response.redirect ("error.asp?target=_self")
+	
+end if
 
+rs.MoveNext
 
-rs.AddNew
+loop
 
-        Do While Val(menor) < Val(mayor)
-                    
-            rs3.AddNew
-            If Left([menor], 1) = 0 Then
-            rs3!cuip = menor
-            Else
-            rs3!cuip = 0 & menor
-            End If
-            rs3!suc = rs1!SUCURSAL
-            rs3.Update
-           
-           menor = Val(menor) + 1
-         
-        Loop
-        
-        rs1.MoveNext
-        mayor = ""
-        menor = ""
-        
-    Loop
+end if
 
 
 %>

@@ -21,7 +21,9 @@ O PORQUE HABIA LETRAS<h2>
 %>
 <h2 align="center"><b> ALGUNO DE LOS RANGOS ESTA REPETIDO. CONTROLE Y VUELVA A CARGAR<h2>
 
-<% end if %>
+<% 
+session("repetido")= "no"
+end if %>
 <a href="cargaRango.asp" target="_self"><input type="button" class="button" name="volver" value="VOLVER"></a>
 
 </body>
