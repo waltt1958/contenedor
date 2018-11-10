@@ -33,12 +33,15 @@ If primero > segundo Then
 	menor = segundo
 	
 End If
-response.write (menor)
-response.write (mayor)
 
 do while not rs.EOF
 
-if (menor = rs("rango_desde")) or (mayor = rs("rango_hasta")) then
+if (menor => rs("rango_desde")) and (mayor <= rs("rango_hasta")) then
+'if (menor = rs("rango_desde")) or (mayor = rs("rango_hasta")) then
+
+%>
+<!--#include virtual="/desconectar.asp"-->
+<%
 	
 	session("repetido")= "si"
 	response.redirect ("error.asp?target=_self")

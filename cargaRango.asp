@@ -22,7 +22,7 @@
 <tr>
 
 <td>
-<b>SELECCIONE LA SUCURSAL</b>
+<b>SELECCIONE LA SUCURSAL</b> 
 </td>
 
 <td>
@@ -35,11 +35,7 @@ rs.open sql, conectarOEP
 
 Do While Not rs.EOF
 
-'response.write "<option value='" & rs("SIGLA") &"' >" & rs("SUCURSAL") & "</option>"
-
 response.write ("<option value='" &rs("CP")&"'>"& rs("SIGLA")& " - " & rs("SUCURSAL") &"</option>" )
-
-
 
 rs.MoveNext
 
