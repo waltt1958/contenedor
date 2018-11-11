@@ -36,7 +36,7 @@ End If
 
 do while not rs.EOF
 
-if (menor => rs("rango_desde")) and (mayor <= rs("rango_hasta")) then
+if (((menor => rs("rango_desde") and menor <= rs("rango_desde)) or (mayor => rs("rango_hasta") and mayor <= rs("rango_hasta"))) then
 'if (menor = rs("rango_desde")) or (mayor = rs("rango_hasta")) then
 
 %>
