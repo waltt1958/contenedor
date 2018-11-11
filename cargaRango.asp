@@ -30,7 +30,7 @@
 <% 
 
 set rs=server.createobject("ADODB.Recordset") 
-sql= "select * from CP_SUCURSALES order by SUCURSAL"
+sql= "select * from CP_SUCURSALES orden by SUCURSAL"
 rs.open sql, conectarOEP 
 
 Do While Not rs.EOF

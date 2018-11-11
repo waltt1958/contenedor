@@ -52,7 +52,14 @@ rs.MoveNext
 
 loop
 
+rs.AddNew
+rs("CP")= cp
+rs("rango_desde")= primero
+rs("rango_hasta")= segundo
+rs.Update
+
 end if
+
 
 
 %>
