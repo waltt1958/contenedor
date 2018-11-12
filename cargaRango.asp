@@ -7,7 +7,9 @@
 
 </HEAD>
 
+
 <body >
+
 <!--#include virtual="/conectar.asp"-->
 
 <H5>Hoy es: <%=weekdayname(weekday(date()))%>, <%=date%></H5>
@@ -27,15 +29,17 @@
 
 <td>
 <Select NAME="select" style="width: 300px;"  SIZE=1 autofocus>
-<% 
 
-set rs=server.createobject("ADODB.Recordset") 
-sql= "select * from CP_SUCURSALES orden by SUCURSAL"
-rs.open sql, conectarOEP 
+<%
+session ("repetido")= "no"
+Set rs = Server.CreateObject("ADODB.recordset")
+sql= "select * from CP_SUCURSALES order by SUCURSAL"
+rs.open sql, conectarOEP
 
-Do While Not rs.EOF
+Do While not rs.EOF
 
-response.write ("<option value='" &rs("CP")&"'>"& rs("SIGLA")& " - " & rs("SUCURSAL") &"</option>" )
+
+response.write ("<option value='" & rs("CP")&"'>" & rs("SIGLA") & " - " & rs("SUCURSAL") & "</option>" )
 
 rs.MoveNext
 

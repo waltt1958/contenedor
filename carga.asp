@@ -4,7 +4,6 @@
 
 <body>
 
-
 <%
 primero	= trim(request.form("primerNUM"))
 segundo = trim(request.form("segundoNUM"))
@@ -18,7 +17,6 @@ else
 %>
 <!--#include virtual="/conectar.asp"-->
 <%
-
 
 set rs=server.createobject("ADODB.Recordset") 
 sql= "select * from RANGOS"
@@ -36,8 +34,7 @@ End If
 
 do while not rs.EOF
 
-if (((menor => rs("rango_desde") and menor <= rs("rango_desde)) or (mayor => rs("rango_hasta") and mayor <= rs("rango_hasta"))) then
-'if (menor = rs("rango_desde")) or (mayor = rs("rango_hasta")) then
+if (menor >= rs("rango_desde") and menor =< rs("rango_hasta")) or (mayor >= rs("rango_desde") and mayor =< rs("rango_hasta")) then
 
 %>
 <!--#include virtual="/desconectar.asp"-->
@@ -52,18 +49,15 @@ rs.MoveNext
 
 loop
 
-rs.AddNew
-rs("CP")= cp
-rs("rango_desde")= primero
-rs("rango_hasta")= segundo
-rs.Update
+conectarOEP.execute "INSERT INTO RANGOS(CP,rango_desde, rango_hasta) VALUES('"&CP&"','"&menor&"', '"&mayor&"')"
 
 end if
-
-
 
 %>
 
 <!--#include virtual="/desconectar.asp"-->
+<%
+response.redirect ("cargaRango.asp?target=_self")
+%>
 </body>
 </html>
