@@ -28,7 +28,9 @@
 </tr>
 </table>
 
-
+<%
+session("repetido")= "no"
+%>
 
 <SCRIPT Language="javascript" type="text/javascript">
 

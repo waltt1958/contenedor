@@ -8,6 +8,7 @@
 primero	= trim(request.form("primerNUM"))
 segundo = trim(request.form("segundoNUM"))
 cp= request.form("select")
+session("repetido")= "no"
 
 if ((not IsNumeric(trim(primero)) or not isNumeric(trim(segundo))) or (len(primero) <> 10 or len(segundo) <> 10)) then
 
@@ -50,6 +51,8 @@ rs.MoveNext
 loop
 
 conectarOEP.execute "INSERT INTO RANGOS(CP,rango_desde, rango_hasta) VALUES('"&CP&"','"&menor&"', '"&mayor&"')"
+
+rs.close
 
 end if
 
