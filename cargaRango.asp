@@ -31,10 +31,13 @@
 <Select NAME="select" style="width: 300px;"  SIZE=1 autofocus>
 
 <%
+
+
 session ("repetido")= "no"
 Set rs = Server.CreateObject("ADODB.recordset")
 sql= "select * from CP_SUCURSALES order by SUCURSAL"
 rs.open sql, conectarOEP
+
 
 Do While not rs.EOF
 
@@ -91,6 +94,8 @@ rs.Close
 
 <%
 session("repetido")= "no"
+response.write(request.form("diez"))
+response.write("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
 %>
 
 <SCRIPT Language="javascript" type="text/javascript">

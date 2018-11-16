@@ -19,42 +19,18 @@
 
 <h3> ELIJA LA OPCIÓN QUE CORRESPONDA</H3>
 <br>
-<form action="cargaRango.asp" name="formulario" id="formulario" method="post">
 
-<input type="hidden" name="oculto">
 
-<table cellspacing="8" align="center">
-
-<tr>
-<td align="center" colspan="2">
-<input type="radio" name="diez" id="diez" value="diez" checked>
-<label for="diez"><b>CB 10 DIGITOS:</b> </label>
-</td>
-</tr>
-
-<tr>
-<td align="center" colspan="2">
-<input type="radio" name="diez" id="doce" value="doce">
-<label for="doce"><b>CB 12 DIGITOS: </b></label>
-</td>
-</tr>
-
+<table align="center">
 <tr align="center">
-
 <td><input type="button" class="button" name="iniciar" onclick=location.href='cargaRango.asp' value="CARGAR RANGOS"></td>
 <td><input type="button" class="button" name="contenedor" onclick=location.href='cargaContenedor.asp' value="GENERAR CONTENEDOR"></td>
-
-
 </tr>
 </table>
-</form>
 
 <%
 session("repetido")= "no"
 %>
-
-
-
 
 <SCRIPT Language="javascript" type="text/javascript">
 
