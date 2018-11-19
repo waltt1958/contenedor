@@ -13,7 +13,7 @@
 <hr size= 6 color="black"></hr>
 
 <% if session("repetido") <> "si" then %>
-<h2 align="center"><b> VUELVA A CARGAR EL ULTIMO RANGO DESDE Y HASTA DADO QUE NO FUE TOMADO POR ERROR EN LA CANTIDAD DE DIGITOS (deben ser 10 numeros) 
+<h2 align="center"><b> VUELVA A CARGAR EL ULTIMO RANGO DESDE Y HASTA DADO QUE NO FUE TOMADO POR ERROR EN LA CANTIDAD DE DIGITOS (deben ser 10 o 12 numeros) 
 O PORQUE HABIA LETRAS<h2>
 
 <% 

@@ -10,7 +10,7 @@ segundo = trim(request.form("segundoNUM"))
 cp= request.form("select")
 session("repetido")= "no"
 
-if ((not IsNumeric(trim(primero)) or not isNumeric(trim(segundo))) or (len(primero) <> 10 or len(segundo) <> 10)) then
+if ((not IsNumeric(trim(primero)) or not isNumeric(trim(segundo))) or ((len(primero) <> 10 and len(primero) <> 12) or (len(segundo) <> 10 and len(segundo) <> 12))) then
 
 response.redirect("error.asp?target=_self")
 

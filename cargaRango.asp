@@ -22,25 +22,20 @@
 <table align="center" border="2">
 
 <tr>
-
 <td>
 <b>SELECCIONE LA SUCURSAL</b> 
 </td>
 
 <td>
 <Select NAME="select" style="width: 300px;"  SIZE=1 autofocus>
-
 <%
-
 
 session ("repetido")= "no"
 Set rs = Server.CreateObject("ADODB.recordset")
 sql= "select * from CP_SUCURSALES order by SUCURSAL"
 rs.open sql, conectarOEP
 
-
 Do While not rs.EOF
-
 
 response.write ("<option value='" & rs("CP")&"'>" & rs("SIGLA") & " - " & rs("SUCURSAL") & "</option>" )
 
@@ -48,36 +43,30 @@ rs.MoveNext
 
 Loop
 rs.Close
-
 %>
 </Select>
 
 </td>
-
 </tr>
 
 <tr>
-
 <td>
 <b>INGRESE EL 1er CODIGO DE BARRAS</b>
 </td>
 
 <td>
-<input type="text" name="primerNUM" id="primerNUM" maxlength="10" required>
+<input type="text" name="primerNUM" id="primerNUM" maxlength="12" required>
 </td>
-
 </tr>
 
 <tr>
-
 <td>
 <b>INGRESE EL 2do CODIGO DE BARRAS</b>
 </td>
 
 <td>
-<input type="text" name="segundoNUM" id="segundoNUM" maxlength="10" onblur="enviar()" required>
+<input type="text" name="segundoNUM" id="segundoNUM" maxlength="12" onblur="enviar()" required>
 </td>
-
 </tr>
 </table>
 
@@ -94,8 +83,6 @@ rs.Close
 
 <%
 session("repetido")= "no"
-response.write(request.form("diez"))
-response.write("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
 %>
 
 <SCRIPT Language="javascript" type="text/javascript">
@@ -104,9 +91,9 @@ function enviar() {
 var primero = document.cargador.primerNUM.value.length;
 var segundo = document.cargador.segundoNUM.value.length;
 
-if (( primero != 10) || (segundo != 10)) {
+if (( primero != 10 && primero != 12) || (segundo != 10 && segundo != 12)) {
 	
-	alert ("Verique CB ingresado. Tiene que tener 10 digitos");
+	alert ("Verique CB ingresado. Tiene que tener 10 o 12 digitos");
 	document.cargador.primerNUM.focus();
 	}
 	

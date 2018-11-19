@@ -1,85 +1,103 @@
 <HTML>
 <HEAD>
 
+<meta charset="utf-8">
+<link rel="stylesheet" title="estilos.css" type="text/css" href="estilos.css">
 <title>CONTENEDORES ROSARIO</title>
 
 </HEAD>
 
-<body>
+<body onload="maximizar()">
+<br>
 
+<H5>Hoy es: <%=weekdayname(weekday(date()))%>, <%=date%></H5>
+<h1>SECTOR INGRESOS Y RENDICIONES DE D.E.</h1>
+<br>
+<hr size= 6 color="black"></hr>
+
+<br>
 <!--#include virtual="/conectar.asp"-->
 <%
 
-response.write (request.form("diez"))
-response.write("aaaaaaaaaaaaaaaaaaA")
+set rsRangos=server.createobject("ADODB.Recordset") 
+sql= "select * from RANGOS"
+rsRangos.open sql, conectarOEP 
 
-' set rsRangos=server.createobject("ADODB.Recordset") 
-' sql= "select * from RANGOS"
-' rsRangos.open sql, conectarOEP 
+do while not rsRangos.EOF
 
+	menor = rsRangos("rango_desde")
+	mayor = rsRangos("rango_hasta")
 
-' do while not rsRangos.EOF
+	CP= rsRangos("CP")
 
-' menor = rsRangos("rango_desde") + 1
-' mayor = rsRangos("rango_hasta")
-' CP= rsRangos("CP")
-
-	 ' do while menor < mayor
-		' conectarOEP.execute "INSERT INTO contenedor(CUIP, CP) VALUES('"&menor&"','"&CP&"')"
-		' menor = menor + 1
-	 ' loop 
+	 do while menor < mayor
+		incluir = Cstr(menor)
+		conectarOEP.execute "INSERT INTO contenedor(CUIP, CP) VALUES('"&incluir&"','"&CP&"')"
+		menor = menor + 1
+	 loop 
 	
-' menor= 0
-' mayor = 0
+	menor= 0
+	mayor = 0
 
-' rsRangos.MoveNext
+	rsRangos.MoveNext
 
-' loop
+loop
 
-' rsRangos.close
+rsRangos.close
 
-' set rsCuenta = server.createobject("ADODB.Recordset")	
-' set rsArchivo = ser.createobject("ADODB.Recordset")
-' sqlcta = "select count (*) AS cuenta from contenedor"
-' sqlarc ="select * from contenedor"
+set rsCuenta = server.createobject("ADODB.Recordset")	
+set rsArchivo = server.createobject("ADODB.Recordset")
+sqlcta = "select count (*) AS cuenta from contenedor"
+sqlarc ="select * from contenedor"
 
-' rsCuenta.open sqlcta, conectarOEP
-' rsArchivo.open sqlarc, conectarOEP
+rsCuenta.open sqlcta, conectarOEP
+rsArchivo.open sqlarc, conectarOEP
 
-' actual = now()
+actual = now()
 
-' nombre = "Contenedor dia " & day(actual) & "-" & month(actual) & "-" & year(actual) & "  "& hour(actual) & "-" & Minute(actual) & "-" 
-' & Second(actual) & ".txt"
+nombre = "Contenedor dia " & day(actual) & "-" & month(actual) & "-" & year(actual) & "  "& hour(actual) & "-" & Minute(actual) & "-" & Second(actual) & ".txt"
 
-' Set fso = Server.CreateObject ("Scripting.FileSystemObject")
+Set fso = Server.CreateObject ("Scripting.FileSystemObject")
 
-' Set arcTEXTO = fso.CreateTextFile(server.mappath(nombre), true)
+Set arcTEXTO = fso.CreateTextFile(server.mappath(nombre), true)
 
- ' texto1 = rsARCHIVO.Fields(0).name & "|" & rsARCHIVO.Fields(7).name & "|" & rsARCHIVO.Fields(1).name & "|" & rsARCHIVO.Fields(8).name & "|" & rsARCHIVO.Fields(9).name & "|" & _
-  ' rsARCHIVO.Fields(10).name & "|" & rsARCHIVO.Fields(2).name & "|" & rsARCHIVO.Fields(3).name & "|" & rsARCHIVO.Fields(4).name & "|" & rsARCHIVO.Fields(11).name & "|" & _
-  ' rsARCHIVO.Fields(12).name & "|" & rsARCHIVO.Fields(13).name & "|" & rsARCHIVO.Fields(14).name & "|" & rsARCHIVO.Fields(15).name & "|" & rsARCHIVO.Fields(16).name _
-  ' & "|" & rsARCHIVO.Fields(17).name & "|" & rsARCHIVO.Fields(18).name & "|" & rsARCHIVO.Fields(19).name & "|" & rsARCHIVO.Fields(20).name & "|" & _
-  ' rsARCHIVO.Fields(21).name & "|" & rsARCHIVO.Fields(22).name & "|" & rsARCHIVO.Fields(23).name & "|" & rsARCHIVO.Fields(24).name & "|" & _
-  ' rsARCHIVO.Fields(25).name & "|" & rsARCHIVO.Fields(26).name & "|" & rsARCHIVO.Fields(27).name & "|" & rsARCHIVO.Fields(5).name & "|" & rsARCHIVO.Fields(28).name _
-  ' & "|" & rsARCHIVO.Fields(6).name & "|" & rsARCHIVO.Fields(29).name & "|" & rsARCHIVO.Fields(30).name & "|" & rsARCHIVO.Fields(31).name
+do while not rsARCHIVO.EOF
+
+	texto = rsARCHIVO.Fields("CUIP") & &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp & rsARCHIVO.Fields("CP")
+	arcTEXTO.WriteLine(texto)
+	rsARCHIVO.MoveNext
+
+loop
+	
+Set fso = nothing
+Set arcTEXTO = nothing
 
 
 
+session("registros")= rsCuenta("cuenta")
 
-' USAR ESTA VARIABLE DE SESSION EN LA PAGINA QUE BAJA EL ARCHIVO PARA INDICAR LA CANTIDAD DE REGISTROS
-'OJO RESTRINGIR EL INGRESO A LA PAGINA, AGREGAR VARIABLE SESSION
+session("nombreArc")= nombre
 
-' session("registros")= rsCuenta("cuenta")
+rsCuenta.close
 
-' rsCuenta.close
-' rsArchivo.close
-
+rsArchivo.close
 
 
 
 %>
 
 <!--#include virtual="/desconectar.asp"-->
+
+
+<table align="center">
+<tr>
+<td>
+<a href="/bajaArchivo.asp" target="_self"><input type="button" name="descarga" value="DESCARGAR ARCHIVO" style="FONT-SIZE: 20pt; border: 5px solid; [b]FONT-FAMILY: Verdana, boldt[/b];
+BACKGROUND-COLOR: #C0C0C0"></a>
+</td>
+</tr>
+
+</table>
 
 </body>
 
