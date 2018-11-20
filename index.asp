@@ -27,14 +27,37 @@
 <td><input type="button" class="button" name="iniciar" onclick=location.href='cargaRango.asp' value="CARGAR RANGOS"></td>
 <td><input type="button" class="button" name="contenedor" onclick=location.href='cargaContenedor.asp' value="GENERAR CONTENEDOR"></td>
 
-
 </tr>
 </table>
-</form>
-
+<script>
 <%
+texto= "txt"
+bbdd= "mdb"
+clasico= "asp"
+forma= "css"
+imagen = "png"
+
+Set objFSO = server.CreateObject ("Scripting.FileSystemObject")
+set objFolder=objFSO.GetFolder("c:\inetpub\wwwroot\contenedor\")
+
+for each objFile in objFolder.files
+
+Select case objFSO.GetExtensionName(objFile)
+case bbdd
+case clasico
+case forma
+case imagen
+case else
+
+objFile.delete
+end select
+
+next
+
+
 session("repetido")= "no"
 %>
+
 
 <SCRIPT Language="javascript" type="text/javascript">
 
@@ -45,7 +68,6 @@ window.moveTo(0,0);
 window.resizeTo(screen.width,screen.height);
 }
 </SCRIPT>
-
 
 </body>
 

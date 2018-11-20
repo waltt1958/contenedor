@@ -53,6 +53,8 @@ sqlarc ="select * from contenedor"
 rsCuenta.open sqlcta, conectarOEP
 rsArchivo.open sqlarc, conectarOEP
 
+espacio10 = "          "
+espacio12= "        "
 actual = now()
 
 nombre = "Contenedor dia " & day(actual) & "-" & month(actual) & "-" & year(actual) & "  "& hour(actual) & "-" & Minute(actual) & "-" & Second(actual) & ".txt"
@@ -61,14 +63,30 @@ Set fso = Server.CreateObject ("Scripting.FileSystemObject")
 
 Set arcTEXTO = fso.CreateTextFile(server.mappath(nombre), true)
 
-do while not rsARCHIVO.EOF
+mostrar = len(rsARCHIVO("CUIP"))
 
-	texto = rsARCHIVO.Fields("CUIP") & &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp & rsARCHIVO.Fields("CP")
-	arcTEXTO.WriteLine(texto)
-	rsARCHIVO.MoveNext
+if mostrar = 10 then
 
-loop
+	do while not rsARCHIVO.EOF
+
+		texto = rsARCHIVO.Fields("CUIP") & espacio10 & rsARCHIVO.Fields("CP")
+		arcTEXTO.WriteLine(texto)
+		rsARCHIVO.MoveNext
+
+	loop
+
+else
+
+	do while not rsARCHIVO.EOF
+
+		texto = rsARCHIVO.Fields("CUIP") & espacio12 & rsARCHIVO.Fields("CP")
+		arcTEXTO.WriteLine(texto)
+		rsARCHIVO.MoveNext
+
+	loop
 	
+end if
+
 Set fso = nothing
 Set arcTEXTO = nothing
 
@@ -88,7 +106,15 @@ rsArchivo.close
 
 <!--#include virtual="/desconectar.asp"-->
 
+<table align="center" style="font-size:20px" border="3" cellspacing=0 bordercolor="black" width="55%" height="10%">
+<tr>
 
+<td align="center" bgcolor="#E6E6FA"><b><u>Se generó el archivo: <%=response.write(nombre) %> y contiene <%= response.write(session("registros")) %></u></b></td>
+
+</tr>
+</table>
+<br>
+<br>
 <table align="center">
 <tr>
 <td>

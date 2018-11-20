@@ -19,6 +19,7 @@
 
 <%
 
+
 FileName= Session("nombreARC")
 Response.Clear 
 Response.ContentType="application / octet-stream"  
@@ -43,14 +44,6 @@ Response.Flush
 Response.End
 
 %>
-
-<table align="center">
-<tr>
-
-<td>Se generó el archivo: <%= session("nombreArc") %> y contiene <%=session("registros") %></td>
-
-</tr>
-</table>
 
 </body>
 </html>
