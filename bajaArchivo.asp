@@ -10,6 +10,8 @@
 <body onload="maximizar()">
 <br>
 
+<!--#include virtual="/conectar.asp"-->
+
 <H5>Hoy es: <%=weekdayname(weekday(date()))%>, <%=date%></H5>
 <h1>SECTOR INGRESOS Y RENDICIONES DE D.E.</h1>
 <br>
@@ -19,6 +21,13 @@
 
 <%
 
+if session("inhabilitar") = "si" then
+
+sqlBORRArangos= "DELETE * from RANGOS"
+conectarOEP.execute sqlBORRArangos
+
+sqlBORRACont = "DELETE * from contenedor"
+conectarOEP.execute sqlBORRACont
 
 FileName= Session("nombreARC")
 Response.Clear 
@@ -43,7 +52,15 @@ Set stream= Nothing
 Response.Flush
 Response.End
 
+else
+
+	response.redirect ("cargaRango.asp?target=_self")
+	
+end if
+
 %>
+
+<!--#include virtual="/desconectar.asp"-->
 
 </body>
 </html>

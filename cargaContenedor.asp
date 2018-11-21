@@ -8,20 +8,26 @@
 </HEAD>
 
 <body onload="maximizar()">
-<br>
 
 <H5>Hoy es: <%=weekdayname(weekday(date()))%>, <%=date%></H5>
 <h1>SECTOR INGRESOS Y RENDICIONES DE D.E.</h1>
-<br>
+<h3>GENERACION DE CONTENEDORES</h3>
 <hr size= 6 color="black"></hr>
 
-<br>
 <!--#include virtual="/conectar.asp"-->
 <%
 
 set rsRangos=server.createobject("ADODB.Recordset") 
 sql= "select * from RANGOS"
+
+Set rsContador = server.createobject("ADODB.Recordset")
+sqlcuenta= "select * from RANGOS"
+rsContador.open sqlcuenta, conectarOEP
+
+if (rsContador.EOF = false and rsContador.BOF = false) then
+
 rsRangos.open sql, conectarOEP 
+
 
 do while not rsRangos.EOF
 
@@ -115,16 +121,40 @@ rsArchivo.close
 </table>
 <br>
 <br>
+
 <table align="center">
 <tr>
 <td>
-<a href="/bajaArchivo.asp" target="_self"><input type="button" name="descarga" value="DESCARGAR ARCHIVO" style="FONT-SIZE: 20pt; border: 5px solid; [b]FONT-FAMILY: Verdana, boldt[/b];
-BACKGROUND-COLOR: #C0C0C0"></a>
+<input type="button" class="button" name="genera" onclick=location.href='bajaArchivo.asp' value="BAJAR ARCHIVO">
 </td>
 </tr>
 
+<tr>
+<td height="10">
+               
+</td>
+</tr>
 </table>
 
+<table align="center">
+<tr>
+<td align="center">
+<input type="button" class="button" name="inicial" onclick=location.href='index.asp' value="VOLVER AL INICIO">
+</td>
+</tr>
+</table>
+
+
+
+<%
+else
+
+	response.redirect ("cargaRango.asp?target=_self")
+
+
+end if
+
+%>
 </body>
 
 </HTML>
