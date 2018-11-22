@@ -37,7 +37,7 @@ do while not rsRangos.EOF
 	CP= rsRangos("CP")
 
 	 do while menor < mayor
-		incluir = Cstr(menor)
+		incluir = 0 & Cstr(menor)
 		conectarOEP.execute "INSERT INTO contenedor(CUIP, CP) VALUES('"&incluir&"','"&CP&"')"
 		menor = menor + 1
 	 loop 
